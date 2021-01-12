@@ -1,4 +1,4 @@
-package com.zhangtl.dynamicarray.arraylist;
+package com.zhangtl.arraylist.dynamicarray.arraylist;
 
 @SuppressWarnings("unchecked")
 public class ArrayListForChkeck<E> {

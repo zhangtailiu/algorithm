@@ -1,4 +1,4 @@
-package com.zhangtl.dynamicarray.arraylist;
+package com.zhangtl.arraylist.dynamicarray.arraylist;
 
 public class MyArrayList<E> {
 
