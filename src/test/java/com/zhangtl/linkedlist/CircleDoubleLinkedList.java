@@ -146,19 +146,29 @@ public class CircleDoubleLinkedList<E> {
         size ++;
 
     }
+    /*
+    * 双向循环链表的删除相对于以前的删除的中段来说没有区别
+    * 只是在头尾删除的时候需要将将头尾节点替换掉
+    *
+    * 最后一个的时候删除情况（自己做的时候遗忘了）
+    * */
+
     public E remove(int index){
         checkrange(index);
         Node<E> node = node(index);
-        Node<E> pre = node.pre;
-        Node<E> next = node.next;
-        if(pre == null){
-            first = next;
+        if(size == 1){
+            first = null;
+            last = null;
         }else {
+            Node<E> pre = node.pre;
+            Node<E> next = node.next;
+            if(index == 0){
+                first = next;
+            }
             pre.next = next;
-        }
-        if(next == null){
-            last = pre;
-        }else {
+            if(index == size-1){
+                last = pre;
+            }
             next.pre = pre;
         }
         size--;
