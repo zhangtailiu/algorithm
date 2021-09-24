@@ -16,4 +16,10 @@ public class Node<E> {
         this.data = data;
         this.parent = parent;
     }
+    public boolean hasTwoNode(){
+        return left != null && right != null;
+    }
+    public boolean isLeaf(){
+        return left == null && right == null;
+    }
 }

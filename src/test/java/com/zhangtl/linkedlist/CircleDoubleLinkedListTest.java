@@ -26,7 +26,7 @@ public class CircleDoubleLinkedListTest {
     }
 
     public static void main(String[] args) {
-        testList(new CircleDoubleLinkedList<>());
+        testList(new CircleDoubleLinkedList<Integer>());
     }
 
 }

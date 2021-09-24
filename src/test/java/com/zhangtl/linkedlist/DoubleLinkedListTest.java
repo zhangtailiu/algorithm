@@ -26,7 +26,7 @@ public class DoubleLinkedListTest {
     }
 
     public static void main(String[] args) {
-        testList(new DoubleLinkedList<>());
+        testList(new DoubleLinkedList<Integer>());
     }
 
 }
