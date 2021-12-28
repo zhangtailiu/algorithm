@@ -1,9 +1,11 @@
 package com.zhangtl.algorithmpdf.onehundred.service;
 
 import com.zhangtl.algorithmpdf.onehundred.entity.ListNode;
+import org.junit.Test;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 public class Test01 {
 
@@ -183,6 +185,34 @@ public class Test01 {
         }else{
             return findKth(nums1, i, nums2, j + k / 2 , k - k / 2);
         }
+    }
+
+    @Test
+    public void testDemo(){
+        List<List<Integer>> list = getList(new int[]{-1, 0, 1, 2, -1, -4});
+        System.out.println(list);
+    }
+
+    public List<List<Integer>> getList(int[] nums){
+        ArrayList<List<Integer>> result = new ArrayList<>();
+
+        Map<Integer,Set<Integer>> collect = new HashMap<>();
+        for (int i = 0; i <  nums.length; i++) {
+           if(!collect.containsKey(nums[i])){
+               collect.put(nums[i],new HashSet<>());
+           }
+           collect.get(nums[i]).add(i);
+
+        }
+        for (int i = 0; i < nums.length-1 ; i++) {
+            for (int j = i + 1; j < nums.length; j++) {
+                Set<Integer> integers = collect.get(-(nums[i] + nums[j]));
+                if (integers != null && !(integers.contains(i) || integers.contains(j))) {
+                    result.add(Arrays.asList(nums[i], nums[j], nums[integers.iterator().next()]));
+                }
+            }
+        }
+        return result.stream().distinct().collect(Collectors.toList());
     }
 
 }
