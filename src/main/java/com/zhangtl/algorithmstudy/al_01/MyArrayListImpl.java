@@ -52,10 +52,8 @@ public class MyArrayListImpl<E> implements MyArrayList<E> {
          * size < length; 直接往后移动一位没关系
          * size = length; 这里因为上一步已经扩容 所以也不会越界
          */
-        if (index < size) {
-            for (int i = size; i > index; i--) {
-                data[i] = data[i - 1];
-            }
+        for (int i = size; i > index; i--) {
+            data[i] = data[i - 1];
         }
         data[index] = element;
         size++;
@@ -63,7 +61,7 @@ public class MyArrayListImpl<E> implements MyArrayList<E> {
 
     /**
      * 删除时要检查在索引[0,size)内 不在[-max,0) || [size,max] 则报错
-     * 注意删除之后判断缩容
+     * 注意删除之后判断缩容(ArrayList未进行缩容)
      *
      * @param index
      * @return
@@ -81,7 +79,6 @@ public class MyArrayListImpl<E> implements MyArrayList<E> {
             data[index] = data[index + 1];
         }
         data[size - 1] = null;
-        reduceCheck(size - 1);
         size--;
         return temp;
     }
@@ -129,14 +126,13 @@ public class MyArrayListImpl<E> implements MyArrayList<E> {
 
     @Override
     public void clear() {
-        data = (E[]) new Object[0];
         size = 0;
     }
 
     //检查是否要缩容
     private void reduceCheck(int curSize) {
         if (curSize < data.length / 4) {
-            E[] temp = (E[]) new Object[data.length/2];
+            E[] temp = (E[]) new Object[data.length / 2];
             for (int i = 0; i < temp.length; i++) {
                 temp[i] = data[i];
             }
@@ -147,7 +143,7 @@ public class MyArrayListImpl<E> implements MyArrayList<E> {
     //检查是否要扩容
     private void expandCheck(int curSize) {
         if (data.length < curSize) {
-            E[] temp = (E[]) new Object[size * 2 + 1];
+            E[] temp = (E[]) new Object[size * 2 + size];
             for (int i = 0; i < data.length; i++) {
                 temp[i] = data[i];
             }
@@ -163,7 +159,7 @@ public class MyArrayListImpl<E> implements MyArrayList<E> {
 
     private void indexCheck(int index) {
         if (index < 0 || index > size) {
-            throw new RuntimeException("index out of range");
+            throw new RuntimeException("index:" + index + " out of range");
         }
     }
 }
