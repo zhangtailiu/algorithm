@@ -8,13 +8,13 @@ import java.util.Map;
 class Solution {
 
     public int[] twoSum(int[] nums, int target) {
-        Map<BigInteger,Integer> key = new HashMap<>();
+        Map<Integer,Integer> key = new HashMap<>();
         for (int i = 0; i < nums.length; i++) {
-            Integer index= key.get(BigInteger.valueOf(target-nums[i]));
+            Integer index= key.get(target-nums[i]);
             if(index != null){
                 return new int[]{index,i};
             }else {
-                key.put(BigInteger.valueOf(nums[i]),i);
+                key.put(nums[i],i);
             }
         }
         return null;
